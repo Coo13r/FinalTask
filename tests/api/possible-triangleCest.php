@@ -18,6 +18,6 @@ class possible_triangleCest
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendGet('/triangle/possible', $sides);
         $I->seeResponseCodeIs(HttpCode::OK);
-        //$I->seeResponseContains("isPossible"=> true);
+        $I->seeResponseContains('{"isPossible":true}');
     }
 }
