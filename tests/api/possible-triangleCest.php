@@ -11,10 +11,10 @@ class possible_triangleCest
     // tests
     public function TestPossibleTriangle(ApiTester $I)
     {
-        $sides = array(
+        $sides = [
             'a' => 1,
             'b' => 2,
-            'c' => 3);
+            'c' => 3];
         $I->haveHttpHeader('Content-Type', 'application/json');
         $I->sendGet('/triangle/possible', $sides);
         $I->seeResponseCodeIs(HttpCode::OK);
