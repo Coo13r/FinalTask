@@ -21,6 +21,13 @@ class ApiTester extends \Codeception\Actor
     use _generated\ApiTesterActions;
 
     /**
-     * Define custom actions here
+     * @param array $sides
+     *
+     * @return void
      */
+
+    public function sendTriangleSides(array $sides = []): void
+    {
+        $this->sendGet('/triangle/possible',  $sides);
+    }
 }
