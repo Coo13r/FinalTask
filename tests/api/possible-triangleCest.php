@@ -16,4 +16,28 @@ use Codeception\Util\HttpCode;
 //        $I->seeResponseCodeIs(HttpCode::OK);
 //        $I->seeResponseContains('{"isPossible":true}');
 //    }
+//
+//    public function Test2(ApiTester $I)
+//    {
+//        $sides = [
+//            'a' => 15,
+//            'b' => 18,
+//            'c' => 34];
+//        $I->haveHttpHeader('Content-Type', 'application/json');
+//        $I->sendGet('/triangle/possible', $sides);
+//        $I->seeResponseCodeIs(HttpCode::OK);
+//        $I->seeResponseContains('{"isPossible":false}');
+//    }
+//
+//    public function Test3(ApiTester $I)
+//    {
+//        $sides = [
+//            'a' => 0,
+//            'b' => 0,
+//            'c' => 1];
+//        $I->haveHttpHeader('Content-Type', 'application/json');
+//        $I->sendGet('/triangle/possible', $sides);
+//        $I->seeResponseCodeIs(HttpCode::BAD_REQUEST);
+//        $I->seeResponseContains('"message":{"error":"Not valid date"}');
+//    }
 //}

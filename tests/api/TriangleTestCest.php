@@ -11,7 +11,6 @@ class TriangleTestCest
      *
      * @dataProvider dataProvider
      */
-
     public function triangleTest(ApiTester $I, Example $provider): void
     {
         $I->sendTriangleSides($provider['sides']);
@@ -22,10 +21,108 @@ class TriangleTestCest
 
     protected function dataProvider(): Generator
     {
+        // Testing possible triangle
         yield [
-            'sides' => ['a' => 2, 'b' => 3, 'c' => 4],
+            'sides' => ['a'=>2, 'b'=>3, 'c'=>4],
             'expectedCode' => HttpCode::OK,
-            'expectedMessage' => ['isPossible' => true]
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>2, 'c'=>2],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        // Testing triangle with number with zero in side
+        yield [
+            'sides' => ['a'=>10, 'b'=>10, 'c'=>10],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        yield [
+            'sides' => ['a'=>15, 'b'=>18, 'c'=>20],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        // Testing triangle with (A+B) > C
+        yield [
+            'sides' => ['a'=>15, 'b'=>18, 'c'=>33],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        yield [
+            'sides' => ['a'=>15, 'b'=>18, 'c'=>34],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => false],
+        ];
+
+        // Testing triangle with (A-B) < C
+        yield [
+            'sides' => ['a'=>19, 'b'=>7, 'c'=>12],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => false],
+        ];
+        yield [
+            'sides' => ['a'=>19, 'b'=>7, 'c'=>13],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        // Testing triangle with not valid sides
+        yield [
+            'sides' => ['a'=>0, 'b'=>0, 'c'=>0],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>0, 'c'=>2],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+        yield [
+            'sides' => ['a'=>0, 'b'=>1, 'c'=>2],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+        yield [
+            'sides' => ['a'=>2, 'b'=>3, 'c'=>0],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>2, 'c'=>-1],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>-1, 'c'=>2],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>-1, 'b'=>2, 'c'=>2],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>2, 'c'=>'Q'],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>'', 'c'=>4],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
         ];
     }
 }
