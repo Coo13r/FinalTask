@@ -42,25 +42,49 @@ class TriangleTestCest
         ];
 
         yield [
+            'sides' => ['a'=>20, 'b'=>19, 'c'=>21],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        yield [
+            'sides' => ['a'=>21, 'b'=>20, 'c'=>21],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => true],
+        ];
+
+        yield [
             'sides' => ['a'=>15, 'b'=>18, 'c'=>20],
             'expectedCode' => HttpCode::OK,
             'expectedMessage' => ['isPossible' => true],
         ];
 
-        // Testing triangle with (A+B) > C
+        // Testing a triangle for a condition A+B > C
         yield [
-            'sides' => ['a'=>15, 'b'=>18, 'c'=>33],
+            'sides' => ['a'=>5, 'b'=>7, 'c'=>11],
             'expectedCode' => HttpCode::OK,
             'expectedMessage' => ['isPossible' => true],
         ];
 
         yield [
-            'sides' => ['a'=>15, 'b'=>18, 'c'=>34],
+            'sides' => ['a'=>5, 'b'=>7, 'c'=>12],
             'expectedCode' => HttpCode::OK,
             'expectedMessage' => ['isPossible' => false],
         ];
 
-        // Testing triangle with (A-B) < C
+        yield [
+            'sides' => ['a'=>5, 'b'=>7, 'c'=>13],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => false],
+        ];
+
+        // Testing a triangle for a condition A-B < C
+        yield [
+            'sides' => ['a'=>19, 'b'=>7, 'c'=>11],
+            'expectedCode' => HttpCode::OK,
+            'expectedMessage' => ['isPossible' => false],
+        ];
+
         yield [
             'sides' => ['a'=>19, 'b'=>7, 'c'=>12],
             'expectedCode' => HttpCode::OK,
@@ -120,7 +144,26 @@ class TriangleTestCest
         ];
 
         yield [
-            'sides' => ['a'=>2, 'b'=>'', 'c'=>4],
+            'sides' => ['a'=>'Z', 'b'=>2, 'c'=>3],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>2, 'b'=>'Z', 'c'=>3],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        // Boolean to number conversion
+        yield [
+            'sides' => ['a'=>3, 'b'=> 3, 'c'=>true],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        yield [
+            'sides' => ['a'=>3, 'b'=> 3, 'c'=>'true'],
             'expectedCode' => HttpCode::BAD_REQUEST,
             'expectedMessage' => ['message' => ['error' => 'Not valid date']],
         ];

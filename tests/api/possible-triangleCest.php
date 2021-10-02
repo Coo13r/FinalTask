@@ -40,4 +40,16 @@ use Codeception\Util\HttpCode;
 //        $I->seeResponseCodeIs(HttpCode::BAD_REQUEST);
 //        $I->seeResponseContains('"message":{"error":"Not valid date"}');
 //    }
+//
+//    public function Test4(ApiTester $I)
+//    {
+//        $sides = [
+//            'a' => 1,
+//            'b' => 1,
+//            'c' => 0];
+//        $I->haveHttpHeader('Content-Type', 'application/json');
+//        $I->sendGet('/triangle/possible', $sides);
+//        $I->seeResponseCodeIs(HttpCode::BAD_REQUEST);
+//        $I->seeResponseContains('"message":{"error":"Not valid date"}');
+//    }
 //}
