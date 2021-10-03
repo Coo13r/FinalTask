@@ -96,13 +96,20 @@ class TriangleTestCest
             'expectedMessage' => ['isPossible' => true],
         ];
 
-        // Testing triangle with not valid sides
+        // Testing triangle with magic zero in C side
         yield [
             'sides' => ['a'=>0, 'b'=>0, 'c'=>0],
             'expectedCode' => HttpCode::BAD_REQUEST,
             'expectedMessage' => ['message' => ['error' => 'Not valid date']],
         ];
 
+        yield [
+            'sides' => ['a'=>-5, 'b'=>'abirvalg', 'c'=>0],
+            'expectedCode' => HttpCode::BAD_REQUEST,
+            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
+        ];
+
+        // Testing triangle with not valid sides
         yield [
             'sides' => ['a'=>2, 'b'=>0, 'c'=>2],
             'expectedCode' => HttpCode::BAD_REQUEST,
@@ -150,7 +157,7 @@ class TriangleTestCest
         ];
 
         yield [
-            'sides' => ['a'=>2, 'b'=>'Z', 'c'=>3],
+            'sides' => ['a'=>2, 'b'=>'A', 'c'=>3],
             'expectedCode' => HttpCode::BAD_REQUEST,
             'expectedMessage' => ['message' => ['error' => 'Not valid date']],
         ];
