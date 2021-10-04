@@ -7,4 +7,5 @@ tests\api\TriangleTestCest.php:triangleTest
 tests\api\TriangleTestCest.php:triangleTest
 tests\api\TriangleTestCest.php:triangleTest
 tests\api\TriangleTestCest.php:triangleTest
-tests\api\possible-triangleCest.php:Test4
+tests\api\TriangleTestCest.php:triangleTest
+tests\api\TriangleTestCest.php:triangleTest
