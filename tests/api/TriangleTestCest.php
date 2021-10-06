@@ -9,7 +9,7 @@ class TriangleTestCest
      * @param ApiTester $I
      * @param Example $provider
      *
-     * @dataProvider dataProvider
+     * @dataProvider triangleTests
      */
     public function triangleTest(ApiTester $I, Example $provider): void
     {
@@ -19,7 +19,7 @@ class TriangleTestCest
         $I->seeResponseContainsJson($provider['expectedMessage']);
     }
 
-    protected function dataProvider(): Generator
+    protected function triangleTests(): Generator
     {
         // Testing possible triangle
         yield [
@@ -97,12 +97,6 @@ class TriangleTestCest
         ];
 
         // Testing triangle with magic zero in C side
-        yield [
-            'sides' => ['a'=> 0, 'b'=> 0, 'c'=> 0],
-            'expectedCode' => HttpCode::BAD_REQUEST,
-            'expectedMessage' => ['message' => ['error' => 'Not valid date']],
-        ];
-
         yield [
             'sides' => ['a'=> -5, 'b'=> 'abirvalg', 'c'=> 0],
             'expectedCode' => HttpCode::BAD_REQUEST,
